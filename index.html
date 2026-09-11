@@ -289,7 +289,8 @@
   }
 
   /* ---------- DETAILS ---------- */
-  .details-section{ padding-top:42px; padding-bottom:42px; overflow:visible; }
+  .details-section{ padding-top:42px; padding-bottom:40px; overflow:visible; }
+  .details-head{ margin-bottom:10px; }
   #details-list{
     position:relative;
     width:100%;
@@ -383,7 +384,18 @@
   }
 
   /* ---------- COUNTDOWN ---------- */
-  .countdown-section{ padding-top:92px; padding-bottom:94px; }
+  .countdown-section{
+    padding-top:28px;
+    padding-bottom:94px;
+    text-align:center;
+    background:var(--paper);
+  }
+  .countdown-divider{
+    width:min(250px, 74%);
+    height:1px;
+    margin:0 auto 28px;
+    background:linear-gradient(90deg,transparent,rgba(72,84,60,0.30),transparent);
+  }
   .countdown-section .hand-head{
     position:relative;
     z-index:2;
@@ -399,35 +411,15 @@
   .countdown-main{
     position:relative;
     width:min(100%, 340px);
-    padding:24px 18px 22px;
+    padding:6px 18px 0;
     text-align:center;
-  }
-  .countdown-main::before,
-  .countdown-main::after{
-    content:'';
-    position:absolute;
-    left:50%;
-    width:min(230px, 78%);
-    height:1px;
-    transform:translateX(-50%);
-    background:linear-gradient(90deg,transparent,rgba(72,84,60,0.32),transparent);
-  }
-  .countdown-main::before{ top:0; }
-  .countdown-main::after{ bottom:0; }
-  .countdown-date{
-    font-family:var(--sans);
-    font-size:10.5px;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    opacity:0.78;
   }
   .countdown-days-row{
     display:inline-flex;
     align-items:flex-end;
     gap:8px;
     position:relative;
-    margin-top:8px;
+    margin-top:6px;
   }
   .countdown-days-num{
     font-family:var(--display);
@@ -503,9 +495,10 @@
   @media (max-width:420px){
     .hero{ padding:40px 20px 30px; }
     .section{ padding:46px 20px; }
-    .countdown-section{ padding-top:78px; padding-bottom:86px; }
+    .countdown-section{ padding-top:26px; padding-bottom:86px; }
+    .countdown-divider{ width:min(230px, 72%); margin-bottom:24px; }
     .countdown-section .hand-head{ margin-bottom:2px; }
-    .countdown-main{ width:min(100%, 320px); padding-top:22px; padding-bottom:22px; }
+    .countdown-main{ width:min(100%, 320px); padding-top:4px; padding-bottom:0; }
     .countdown-days-num{ font-size:clamp(64px, 18vw, 82px); }
     .countdown-days-label{ font-size:30px; margin-bottom:8px; }
     .countdown-sub{ font-size:9.8px; line-height:1.65; }
@@ -516,6 +509,7 @@
     }
 
     .details-section{ padding-top:30px; padding-bottom:30px; }
+    .details-head{ margin-bottom:6px; }
     #details-list{
       max-width:360px;
       min-height:340px;
@@ -530,7 +524,7 @@
       width:202px;
     }
     .detail-item:nth-child(2){
-      right:-4px;
+      right:2px;
       top:128px;
       width:224px;
       padding-left:22px;
@@ -652,13 +646,17 @@
        DETAILS
        ============================================================ -->
   <section class="section details-section">
+    <div class="section-head details-head reveal">
+      <div class="hand-head">детали</div>
+    </div>
     <div id="details-list"></div>
   </section>
 
   <!-- ============================================================
        COUNTDOWN
        ============================================================ -->
-  <section class="section countdown-section" style="text-align:center; background:var(--paper-2);">
+  <section class="section countdown-section">
+    <div class="countdown-divider reveal" aria-hidden="true"></div>
     <div class="hand-head reveal" id="countdown-head"></div>
     <div class="countdown reveal" id="countdown"></div>
   </section>
@@ -942,13 +940,11 @@
 
     wrap.innerHTML =
       '<div class="countdown-main">' +
-        '<div class="countdown-date">' + CONFIG.dateLabel.replace(/\./g, ' · ') + '</div>' +
         '<div class="countdown-days-row">' +
           '<div class="countdown-days-num" id="cd-d">00</div>' +
           '<div class="countdown-days-label" id="cd-d-label">дней</div>' +
         '</div>' +
         '<div class="countdown-sub">' +
-          'до нашей встречи<br>' +
           '<span class="cd-inline-num" id="cd-h">00</span> ч &nbsp;·&nbsp; ' +
           '<span class="cd-inline-num" id="cd-m">00</span> мин' +
         '</div>' +
