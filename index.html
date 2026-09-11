@@ -290,7 +290,7 @@
 
   /* ---------- DETAILS ---------- */
   .details-section{ padding-top:42px; padding-bottom:40px; overflow:visible; }
-  .details-head{ margin-bottom:10px; }
+  .details-head{ margin-bottom:24px; }
   #details-list{
     position:relative;
     width:100%;
@@ -319,7 +319,7 @@
 
   .detail-item:nth-child(1){
     left:8px;
-    top:22px;
+    top:34px;
     width:238px;
     transform:rotate(-2.2deg);
     z-index:2;
@@ -327,7 +327,7 @@
 
   .detail-item:nth-child(2){
     right:4px;
-    top:136px;
+    top:162px;
     width:258px;
     padding-left:28px;
     padding-right:28px;
@@ -415,11 +415,12 @@
     text-align:center;
   }
   .countdown-days-row{
-    display:inline-flex;
-    align-items:flex-end;
-    gap:8px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0;
     position:relative;
-    margin-top:6px;
+    margin-top:12px;
   }
   .countdown-days-num{
     font-family:var(--display);
@@ -432,13 +433,13 @@
   .countdown-days-label{
     font-family:var(--hand);
     font-weight:400;
-    font-size:clamp(28px, 7vw, 38px);
+    font-size:clamp(27px, 6.5vw, 34px);
     line-height:1;
     color:var(--ink);
-    margin-bottom:9px;
+    margin-top:-4px;
   }
   .countdown-sub{
-    margin-top:12px;
+    margin-top:14px;
     font-family:var(--sans);
     font-size:10.5px;
     letter-spacing:0.13em;
@@ -497,11 +498,11 @@
     .section{ padding:46px 20px; }
     .countdown-section{ padding-top:26px; padding-bottom:86px; }
     .countdown-divider{ width:min(230px, 72%); margin-bottom:24px; }
-    .countdown-section .hand-head{ margin-bottom:2px; }
+    .countdown-section .hand-head{ margin-bottom:4px; }
     .countdown-main{ width:min(100%, 320px); padding-top:4px; padding-bottom:0; }
     .countdown-days-num{ font-size:clamp(64px, 18vw, 82px); }
-    .countdown-days-label{ font-size:30px; margin-bottom:8px; }
-    .countdown-sub{ font-size:9.8px; line-height:1.65; }
+    .countdown-days-label{ font-size:29px; margin-top:-3px; }
+    .countdown-sub{ margin-top:12px; font-size:9.8px; line-height:1.65; }
     .tl-desc{ font-size:12px; }
     .tl-item:nth-child(even) .tl-address-pop{
       left:auto;
@@ -509,10 +510,10 @@
     }
 
     .details-section{ padding-top:30px; padding-bottom:30px; }
-    .details-head{ margin-bottom:6px; }
+    .details-head{ margin-bottom:20px; }
     #details-list{
       max-width:360px;
-      min-height:340px;
+      min-height:374px;
     }
     .detail-item{
       min-height:0;
@@ -520,12 +521,12 @@
     }
     .detail-item:nth-child(1){
       left:0;
-      top:18px;
+      top:32px;
       width:202px;
     }
     .detail-item:nth-child(2){
       right:2px;
-      top:128px;
+      top:156px;
       width:224px;
       padding-left:22px;
       padding-right:22px;
@@ -537,21 +538,21 @@
 
   @media (max-width:350px){
     #details-list{
-      min-height:360px;
+      min-height:392px;
     }
     .detail-item{
       min-height:0;
     }
     .detail-item:nth-child(1){
       left:0;
-      top:18px;
+      top:30px;
       width:206px;
       margin:0;
       transform:rotate(-1.5deg);
     }
     .detail-item:nth-child(2){
       right:0;
-      top:148px;
+      top:174px;
       width:225px;
       margin:0;
       transform:rotate(1.6deg);
@@ -752,7 +753,7 @@
       { time:"12:30", title:"Сбор гостей", desc:"Приходите чуть заранее — соберёмся, обнимемся, выпьем welcome-напиток." },
       {
         time:"13:00",
-        title:"Роспись в ЗАГСе",
+        title:"Роспись в&nbsp;ЗАГСе",
         desc:"На всякий случай приготовьте носовые платочки для трогательного момента.",
         address:"Красная ул., 22, Славянск-на-Кубани"
       },
