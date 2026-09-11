@@ -410,54 +410,51 @@
   }
   .countdown-main{
     position:relative;
-    width:min(100%, 340px);
-    padding:0 18px;
+    width:min(100%, 356px);
+    padding:0 6px;
     text-align:center;
   }
-  .countdown-days-row{
-    display:flex;
-    flex-direction:column;
+  .countdown-strip{
+    display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
     align-items:center;
-    gap:0;
-    position:relative;
+    justify-items:center;
+    column-gap:7px;
     margin-top:0;
   }
-  .countdown-days-num{
+  .countdown-unit{
+    min-width:0;
+    text-align:center;
+  }
+  .countdown-value{
     font-family:var(--display);
     font-weight:700;
-    font-size:clamp(82px, 20vw, 104px);
-    line-height:0.74;
+    font-size:clamp(42px, 11.5vw, 58px);
+    line-height:0.85;
     color:var(--green-deep);
     letter-spacing:0;
   }
-  .countdown-days-label{
-    font-family:var(--hand);
-    font-weight:400;
-    font-size:clamp(28px, 6.2vw, 34px);
-    line-height:0.95;
-    color:var(--ink);
-    margin-top:12px;
-  }
-  .countdown-sub{
-    margin-top:32px;
+  .countdown-label{
+    display:block;
+    margin-top:9px;
     font-family:var(--sans);
-    font-size:10.5px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
+    font-size:9px;
+    font-weight:600;
+    line-height:1.1;
+    letter-spacing:0.09em;
     color:var(--ink-soft);
-    line-height:1.5;
+    text-transform:lowercase;
     white-space:nowrap;
   }
-  .countdown-sub .cd-inline-num{
-    color:var(--ink);
-    font-weight:600;
-    letter-spacing:0.08em;
-  }
-  .countdown-dot{
-    display:inline-block;
-    margin:0 8px;
-    color:rgba(107,104,94,0.74);
-    letter-spacing:0;
+  .countdown-sep{
+    align-self:start;
+    padding-top:1px;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px, 9vw, 48px);
+    line-height:0.85;
+    color:var(--green-deep);
+    opacity:0.88;
   }
 
   /* ---------- warm paper block ---------- */
@@ -507,11 +504,11 @@
     .countdown-divider{ width:min(230px, 72%); margin-bottom:24px; }
     .countdown-section .hand-head{ margin-bottom:4px; }
     .countdown{ margin-top:38px; }
-    .countdown-main{ width:min(100%, 320px); padding-top:0; padding-bottom:0; }
-    .countdown-days-num{ font-size:clamp(82px, 22vw, 94px); }
-    .countdown-days-label{ font-size:29px; margin-top:10px; }
-    .countdown-sub{ margin-top:28px; font-size:9.6px; line-height:1.5; letter-spacing:0.17em; }
-    .countdown-dot{ margin:0 7px; }
+    .countdown-main{ width:min(100%, 332px); padding-top:0; padding-bottom:0; }
+    .countdown-strip{ column-gap:5px; }
+    .countdown-value{ font-size:clamp(38px, 10.8vw, 48px); }
+    .countdown-label{ margin-top:8px; font-size:8.2px; letter-spacing:0.07em; }
+    .countdown-sep{ font-size:clamp(32px, 8.5vw, 42px); }
     .tl-desc{ font-size:12px; }
     .tl-item:nth-child(even) .tl-address-pop{
       left:auto;
@@ -950,14 +947,26 @@
 
     wrap.innerHTML =
       '<div class="countdown-main">' +
-        '<div class="countdown-days-row">' +
-          '<div class="countdown-days-num" id="cd-d">00</div>' +
-          '<div class="countdown-days-label" id="cd-d-label">дней</div>' +
-        '</div>' +
-        '<div class="countdown-sub">' +
-          '<span class="cd-inline-num" id="cd-h">00</span> часов&nbsp;' +
-          '<span class="countdown-dot">·</span>' +
-          '&nbsp;<span class="cd-inline-num" id="cd-m">00</span> минут' +
+        '<div class="countdown-strip" aria-label="До свадьбы">' +
+          '<div class="countdown-unit">' +
+            '<div class="countdown-value" id="cd-d">00</div>' +
+            '<div class="countdown-label" id="cd-d-label">дней</div>' +
+          '</div>' +
+          '<div class="countdown-sep">:</div>' +
+          '<div class="countdown-unit">' +
+            '<div class="countdown-value" id="cd-h">00</div>' +
+            '<div class="countdown-label" id="cd-h-label">часов</div>' +
+          '</div>' +
+          '<div class="countdown-sep">:</div>' +
+          '<div class="countdown-unit">' +
+            '<div class="countdown-value" id="cd-m">00</div>' +
+            '<div class="countdown-label" id="cd-m-label">минут</div>' +
+          '</div>' +
+          '<div class="countdown-sep">:</div>' +
+          '<div class="countdown-unit">' +
+            '<div class="countdown-value" id="cd-s">00</div>' +
+            '<div class="countdown-label" id="cd-s-label">секунд</div>' +
+          '</div>' +
         '</div>' +
       '</div>';
 
@@ -970,6 +979,14 @@
       if (last === 1) return 'день';
       return 'дней';
     }
+    function plural(n, one, few, many){
+      const abs = Math.abs(n) % 100;
+      const last = abs % 10;
+      if (abs > 10 && abs < 20) return many;
+      if (last > 1 && last < 5) return few;
+      if (last === 1) return one;
+      return many;
+    }
 
     function tick(){
       const now = new Date();
@@ -979,11 +996,16 @@
       const days = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
 
       document.getElementById('cd-d').textContent = days;
       document.getElementById('cd-d-label').textContent = pluralDays(days);
       document.getElementById('cd-h').textContent = pad(hours);
+      document.getElementById('cd-h-label').textContent = plural(hours, 'час', 'часа', 'часов');
       document.getElementById('cd-m').textContent = pad(minutes);
+      document.getElementById('cd-m-label').textContent = plural(minutes, 'минута', 'минуты', 'минут');
+      document.getElementById('cd-s').textContent = pad(seconds);
+      document.getElementById('cd-s-label').textContent = plural(seconds, 'секунда', 'секунды', 'секунд');
     }
 
     tick();
