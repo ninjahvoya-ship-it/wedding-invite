@@ -404,14 +404,14 @@
     margin-bottom:4px;
   }
   .countdown{
-    margin-top:8px;
+    margin-top:46px;
     display:flex;
     justify-content:center;
   }
   .countdown-main{
     position:relative;
     width:min(100%, 340px);
-    padding:6px 18px 0;
+    padding:0 18px;
     text-align:center;
   }
   .countdown-days-row{
@@ -420,37 +420,44 @@
     align-items:center;
     gap:0;
     position:relative;
-    margin-top:12px;
+    margin-top:0;
   }
   .countdown-days-num{
     font-family:var(--display);
     font-weight:700;
-    font-size:clamp(66px, 19vw, 94px);
-    line-height:0.9;
+    font-size:clamp(82px, 20vw, 104px);
+    line-height:0.74;
     color:var(--green-deep);
     letter-spacing:0;
   }
   .countdown-days-label{
     font-family:var(--hand);
     font-weight:400;
-    font-size:clamp(27px, 6.5vw, 34px);
-    line-height:1;
+    font-size:clamp(28px, 6.2vw, 34px);
+    line-height:0.95;
     color:var(--ink);
-    margin-top:-4px;
+    margin-top:12px;
   }
   .countdown-sub{
-    margin-top:14px;
+    margin-top:32px;
     font-family:var(--sans);
     font-size:10.5px;
-    letter-spacing:0.13em;
+    letter-spacing:0.18em;
     text-transform:uppercase;
     color:var(--ink-soft);
-    line-height:1.65;
+    line-height:1.5;
+    white-space:nowrap;
   }
   .countdown-sub .cd-inline-num{
     color:var(--ink);
     font-weight:600;
-    letter-spacing:0.06em;
+    letter-spacing:0.08em;
+  }
+  .countdown-dot{
+    display:inline-block;
+    margin:0 8px;
+    color:rgba(107,104,94,0.74);
+    letter-spacing:0;
   }
 
   /* ---------- warm paper block ---------- */
@@ -499,10 +506,12 @@
     .countdown-section{ padding-top:26px; padding-bottom:86px; }
     .countdown-divider{ width:min(230px, 72%); margin-bottom:24px; }
     .countdown-section .hand-head{ margin-bottom:4px; }
-    .countdown-main{ width:min(100%, 320px); padding-top:4px; padding-bottom:0; }
-    .countdown-days-num{ font-size:clamp(64px, 18vw, 82px); }
-    .countdown-days-label{ font-size:29px; margin-top:-3px; }
-    .countdown-sub{ margin-top:12px; font-size:9.8px; line-height:1.65; }
+    .countdown{ margin-top:38px; }
+    .countdown-main{ width:min(100%, 320px); padding-top:0; padding-bottom:0; }
+    .countdown-days-num{ font-size:clamp(82px, 22vw, 94px); }
+    .countdown-days-label{ font-size:29px; margin-top:10px; }
+    .countdown-sub{ margin-top:28px; font-size:9.6px; line-height:1.5; letter-spacing:0.17em; }
+    .countdown-dot{ margin:0 7px; }
     .tl-desc{ font-size:12px; }
     .tl-item:nth-child(even) .tl-address-pop{
       left:auto;
@@ -946,8 +955,9 @@
           '<div class="countdown-days-label" id="cd-d-label">дней</div>' +
         '</div>' +
         '<div class="countdown-sub">' +
-          '<span class="cd-inline-num" id="cd-h">00</span> ч &nbsp;·&nbsp; ' +
-          '<span class="cd-inline-num" id="cd-m">00</span> мин' +
+          '<span class="cd-inline-num" id="cd-h">00</span> часов&nbsp;' +
+          '<span class="countdown-dot">·</span>' +
+          '&nbsp;<span class="cd-inline-num" id="cd-m">00</span> минут' +
         '</div>' +
       '</div>';
 
