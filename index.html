@@ -148,6 +148,8 @@
     z-index:20;
     bottom:calc(100% + 8px);
     width:210px;
+    max-width:calc(100vw - 40px);
+    box-sizing:border-box;
     padding:11px 12px 10px;
     background:var(--cream);
     border:1px solid var(--line);
@@ -177,6 +179,7 @@
     font-size:10.5px;
     line-height:1.45;
     color:var(--ink-soft);
+    overflow-wrap:break-word;
   }
   .tl-map-link{
     display:inline-block;
@@ -482,6 +485,10 @@
     .countdown-days-label{ font-size:24px; margin-bottom:10px; }
     .countdown-sub{ font-size:10px; line-height:1.6; }
     .tl-desc{ font-size:12px; }
+    .tl-item:nth-child(even) .tl-address-pop{
+      left:auto;
+      right:0;
+    }
 
     .details-section{ padding-top:30px; padding-bottom:30px; }
     #details-list{
