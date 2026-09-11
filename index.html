@@ -383,57 +383,81 @@
   }
 
   /* ---------- COUNTDOWN ---------- */
-  .countdown-section{ padding-top:96px; padding-bottom:96px; }
+  .countdown-section{ padding-top:92px; padding-bottom:94px; }
   .countdown-section .hand-head{
     position:relative;
     z-index:2;
     display:inline-block;
-    font-size:clamp(30px, 7vw, 40px);
-    margin-bottom:-10px;
+    font-size:clamp(28px, 6.6vw, 38px);
+    margin-bottom:4px;
   }
   .countdown{
-    margin-top:10px;
+    margin-top:8px;
     display:flex;
     justify-content:center;
   }
   .countdown-main{
+    position:relative;
+    width:min(100%, 340px);
+    padding:24px 18px 22px;
     text-align:center;
+  }
+  .countdown-main::before,
+  .countdown-main::after{
+    content:'';
+    position:absolute;
+    left:50%;
+    width:min(230px, 78%);
+    height:1px;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg,transparent,rgba(72,84,60,0.32),transparent);
+  }
+  .countdown-main::before{ top:0; }
+  .countdown-main::after{ bottom:0; }
+  .countdown-date{
+    font-family:var(--sans);
+    font-size:10.5px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0.78;
   }
   .countdown-days-row{
     display:inline-flex;
     align-items:flex-end;
-    gap:10px;
+    gap:8px;
     position:relative;
+    margin-top:8px;
   }
   .countdown-days-num{
-    font-family:var(--sans);
-    font-weight:300;
-    font-size:clamp(76px, 22vw, 118px);
-    line-height:0.88;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(66px, 19vw, 94px);
+    line-height:0.9;
     color:var(--green-deep);
-    letter-spacing:-0.05em;
+    letter-spacing:0;
   }
   .countdown-days-label{
-    font-family:var(--display);
-    font-style:italic;
-    font-size:clamp(26px, 5vw, 32px);
+    font-family:var(--hand);
+    font-weight:400;
+    font-size:clamp(28px, 7vw, 38px);
     line-height:1;
     color:var(--ink);
-    margin-bottom:12px;
-    margin-left:-2px;
+    margin-bottom:9px;
   }
   .countdown-sub{
     margin-top:12px;
     font-family:var(--sans);
-    font-size:11px;
-    letter-spacing:0.18em;
+    font-size:10.5px;
+    letter-spacing:0.13em;
     text-transform:uppercase;
     color:var(--ink-soft);
+    line-height:1.65;
   }
   .countdown-sub .cd-inline-num{
     color:var(--ink);
     font-weight:600;
-    letter-spacing:0.08em;
+    letter-spacing:0.06em;
   }
 
   /* ---------- warm paper block ---------- */
@@ -479,11 +503,12 @@
   @media (max-width:420px){
     .hero{ padding:40px 20px 30px; }
     .section{ padding:46px 20px; }
-    .countdown-section{ padding-top:82px; padding-bottom:84px; }
-    .countdown-section .hand-head{ margin-bottom:-8px; }
-    .countdown-days-num{ font-size:clamp(66px, 22vw, 92px); }
-    .countdown-days-label{ font-size:24px; margin-bottom:10px; }
-    .countdown-sub{ font-size:10px; line-height:1.6; }
+    .countdown-section{ padding-top:78px; padding-bottom:86px; }
+    .countdown-section .hand-head{ margin-bottom:2px; }
+    .countdown-main{ width:min(100%, 320px); padding-top:22px; padding-bottom:22px; }
+    .countdown-days-num{ font-size:clamp(64px, 18vw, 82px); }
+    .countdown-days-label{ font-size:30px; margin-bottom:8px; }
+    .countdown-sub{ font-size:9.8px; line-height:1.65; }
     .tl-desc{ font-size:12px; }
     .tl-item:nth-child(even) .tl-address-pop{
       left:auto;
@@ -917,11 +942,13 @@
 
     wrap.innerHTML =
       '<div class="countdown-main">' +
+        '<div class="countdown-date">' + CONFIG.dateLabel.replace(/\./g, ' · ') + '</div>' +
         '<div class="countdown-days-row">' +
           '<div class="countdown-days-num" id="cd-d">00</div>' +
           '<div class="countdown-days-label" id="cd-d-label">дней</div>' +
         '</div>' +
         '<div class="countdown-sub">' +
+          'до нашей встречи<br>' +
           '<span class="cd-inline-num" id="cd-h">00</span> ч &nbsp;·&nbsp; ' +
           '<span class="cd-inline-num" id="cd-m">00</span> мин' +
         '</div>' +
